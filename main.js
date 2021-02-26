@@ -10,7 +10,7 @@ while (boxes[i] != undefined) {
   i++;
 }
 
-var row;
+var row, diagonal;
 
 // if t is odd then player 1
 // if t is even then player 2
@@ -33,13 +33,11 @@ function draw(x) {
 }
 
 function check(x) {
-  var y = checkRow(x);
-  console.log(y);
-  var z = checkColumn(x);
-  console.log(z);
-  // if () {
-  //   console.log("Row Done");
-  // }
+  if (checkRow(x) || checkColumn(x) || checkDiagonal(x)) {
+    if ((t - 1) % 2 == 0) {
+      alert("&#9675" + "won");
+    }
+  }
 }
 
 function checkRow(x) {
@@ -76,6 +74,7 @@ function checkRow(x) {
       return true;
     }
   }
+  return false;
 }
 
 function checkColumn(x) {
@@ -109,5 +108,43 @@ function checkColumn(x) {
     if (row[0] == row[1] && row[1] == row[2]) {
       return true;
     }
+  }
+  return false;
+}
+
+function checkDiagonal(x) {
+  var id = parseInt(x.id);
+  var ans1, ans2;
+  if (id % 2 == 0) {
+    return false;
+  }
+  if (id == 1 || id == 5 || id == 9) {
+    diagonal = [
+      document.getElementById("1").firstChild.nodeValue,
+      document.getElementById("5").firstChild.nodeValue,
+      document.getElementById("9").firstChild.nodeValue,
+    ];
+    if (diagonal[0] == diagonal[1] && diagonal[1] == diagonal[2]) {
+      ans1 = true;
+    } else {
+      ans1 = false;
+    }
+  }
+
+  if (id == 3 || id == 5 || id == 7) {
+    diagonal = [
+      document.getElementById("3").firstChild.nodeValue,
+      document.getElementById("5").firstChild.nodeValue,
+      document.getElementById("7").firstChild.nodeValue,
+    ];
+
+    if (diagonal[0] == diagonal[1] && diagonal[1] == diagonal[2]) {
+      ans2 = true;
+    } else {
+      ans2 = false;
+    }
+  }
+  if (ans1 || ans2) {
+    return true;
   }
 }
