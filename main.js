@@ -1,3 +1,6 @@
+var p1 = prompt("Name Of Player 1:");
+var p2 = prompt("Name Of Player 2:");
+
 var boxes = document.getElementsByClassName("container-item");
 var t = 1; //t stands for try
 // console.log(boxes);
@@ -35,7 +38,11 @@ function draw(x) {
 function check(x) {
   if (checkRow(x) || checkColumn(x) || checkDiagonal(x)) {
     if ((t - 1) % 2 == 0) {
-      alert("&#9675" + "won");
+      alert(p2 + " won");
+      location.reload();
+    } else {
+      alert(p1 + " won");
+      location.reload();
     }
   }
 }
